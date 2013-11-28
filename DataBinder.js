@@ -31,16 +31,22 @@ define([], function(){
 
 		var setValue = function(jsonPath) {
 			var value = getControlValue(control);
-			value = convertType(jsonPath, value);
+			control.modelType = control.modelType || getValueType(jsonPath);
+			if (control.modelType === "number") {
+				value = convertToNumber(jsonPath, value);
+			}
 
-			console.log("setting", jsonPath, value);
 			new Function(["json", "value"], "json." + jsonPath + " = value")(json, value);
 		};
+		
+		var getValueType = function(jsonPath){
+			return typeof new Function(["json"], "return json." + jsonPath)(json);
+		};
 
-		var convertType = function(jsonPath, newValue) {
-			var previousType = typeof new Function(["json"], "return json." + jsonPath)(json);
+		var convertToNumber = function(jsonPath, newValue) {
 			var newValueNumber = parseFloat(newValue);
-			if (previousType === "number" && !isNaN(newValueNumber)) {
+
+			if (!isNaN(newValueNumber)) {
 				return newValueNumber;
 			}
 			return newValue;
@@ -60,4 +66,3 @@ define([], function(){
 	
 	return Binder;
 });
-	
