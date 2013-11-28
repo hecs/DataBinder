@@ -1,0 +1,16 @@
+{
+  "name": "DataBinder",
+  "version": "0.0.1",
+  "description": "",
+  "main": "DataBinder.js",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Henrik Friberg",
+  "license": "BSD"
+}
